@@ -1,4 +1,9 @@
 #root{
+    height: 100vh;
+    width: 100vw;
+}
+
+.main{
     background-image: url( '/src/assets/BG/bg.svg' );
     background-repeat: no-repeat;
     background-size: cover;
