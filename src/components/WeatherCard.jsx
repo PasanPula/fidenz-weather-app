@@ -13,11 +13,19 @@ import {
 } from "@chakra-ui/react";
 import { IoCloseOutline } from "react-icons/io5";
 import cardBg from "../assets/BG/cardBg.png";
+// eslint-disable-next-line no-unused-vars
+import {BsSun,BsCloudDrizzle,BsClouds,BsCloudy,BsCloudSun,BsCloudFog} from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 
+const WeatherCard = ({ weather, cardColor }) => {
+  const navigate = useNavigate();
 
-const WeatherCard = ({ key, num }) => {
   return (
-    <Card key={key} backgroundColor={"cardBlue"} color={"white"}>
+    <Card backgroundColor={cardColor} color={"white"} cursor={'pointer'} onClick={() => {  navigate(`${weather.name}`,
+    {state:{
+      weather,
+      cardColor
+    } }) }}>
       <CardHeader p={0} display={"flex"} justifyContent={"flex-end"}>
         <Button
           _hover={{ backgroundColor: "transparent" }}
@@ -41,28 +49,28 @@ const WeatherCard = ({ key, num }) => {
         <SimpleGrid columns={2} spacing={2} justifyItems={'center'} alignItems={'center'}>
           <Box>
             <Text fontSize={"xl"} fontWeight={"700"}>
-              Colombo,LK
+              {weather.name},{weather.country}
             </Text>
-            <Center fontSize={"2xs"}>09.50am Feb {num }</Center>
+            <Center fontSize={"2xs"}> {weather.time},{weather.date} </Center>
           </Box>
           <Box>
             <Text fontSize={"6xl"} fontWeight={"500"}>
-              26&deg;c
+              {parseInt(weather.temp)}&deg;c
             </Text>
           </Box>
         </SimpleGrid>
         <SimpleGrid columns={2} spacing={2} justifyItems={'center'}>
           <HStack>
-          <Icon as={IoCloseOutline} /> <Text fontSize={"sm"} fontWeight={"500"}>
-             Few Clouds
+          <Icon as={eval(weather.icon)} /> <Text fontSize={"sm"} fontWeight={"500"}>
+             {weather.description}
             </Text>
           </HStack>
           <Box>
             <Text fontSize={"sm"} fontWeight={"500"}>
-              Temp Min: 25&deg;C
+              Temp Min: {parseInt(weather.temp_min)}&deg;c
             </Text>
             <Text fontSize={"sm"} fontWeight={"500"}>
-              Temp Max: 26&deg;c
+              Temp Max: {parseInt(weather.temp_max)}&deg;c
             </Text>
           </Box>
         </SimpleGrid>

@@ -6,12 +6,41 @@ import {
   InputRightElement,
   Box,
   SimpleGrid,
+  Spinner,
+  Text,
 } from "@chakra-ui/react";
 import WeatherCard from "../../components/WeatherCard";
+import cityList from "../../configs/cities.json";
+import { useQuery } from "@tanstack/react-query";
+import { getCityWeather } from "../../api/weatherApi";
+import weatherFilter from "../../util/jsonWeatherFilter";
 
 const Home = () => {
+  let cities = cityList.List.map((city) => city.CityCode).join(",");
+  const cardColors = [
+    "cardBlue",
+    "cardOrange",
+    "cardGreen",
+    "cardPurple",
+    "cardRed",
+  ];
+  let colorIndex = 0;
+  
+  const {
+    isLoading,
+    isError,
+    error,
+    data: cityWeather,
+  } = useQuery({
+    queryKey: ["cityWeatherKey"],
+    queryFn: () => getCityWeather(cities),
+    select: weatherFilter,
+    retry: 3,
+    staleTime: 300000, 
+  });
+
   return (
-    <Box as="container">
+    <Box as="main">
       <Center as="section">
         <InputGroup variant="filled" size="md" width={"40%"}>
           <Input
@@ -43,11 +72,32 @@ const Home = () => {
         </InputGroup>
       </Center>
       <Center as="section" mt={20} pb={40}>
-        <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={'60%'}>
-          {[1,23,4,5,6,7].map((num,index) => {
-            return <WeatherCard key={index} num={num}/>
-          })}
-        </SimpleGrid>
+        {isLoading ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        ) : isError ? (
+          <Text fontSize={"4xl"}>{error.message}</Text>
+        ) : (
+          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={"60%"}>
+            {cityWeather.map((city, index) => {
+              if (colorIndex >= cardColors.length) {
+                colorIndex = 0;
+              }
+              return (
+                <WeatherCard
+                  key={index}
+                  weather={city}
+                  cardColor={cardColors[colorIndex++]}
+                />
+              );
+            })}
+          </SimpleGrid>
+        )}
       </Center>
     </Box>
   );
