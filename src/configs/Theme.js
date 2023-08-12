@@ -2,6 +2,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 const customTheme = {
     colors:{
+        bgBlack: '#1f2128',
         bgDark: '#383b47',
         cardBlue: '#388ee7',
         cardOrange: '#de944e',
