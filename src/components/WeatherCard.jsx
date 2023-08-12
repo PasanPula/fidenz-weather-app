@@ -48,28 +48,29 @@ const WeatherCard = ({ weather, cardColor }) => {
       >
         <SimpleGrid columns={2} spacing={2} justifyItems={'center'} alignItems={'center'}>
           <Box>
-            <Text fontSize={"xl"} fontWeight={"700"}>
+            <Text fontSize={{ base: '1em', md: '1.1em', lg: '1.5em' }} fontWeight={"700"}>
               {weather.name},{weather.country}
             </Text>
-            <Center fontSize={"2xs"}> {weather.time},{weather.date} </Center>
+            <Center fontSize={{ base: 'xs', md: 'smaller', lg: 'smaller' }}> {weather.time}, {weather.date} </Center>
           </Box>
           <Box>
-            <Text fontSize={"6xl"} fontWeight={"500"}>
+            <Text fontSize={{ base: '2.5em', md: '2.5em', lg: '3em' }} fontWeight={"500"}>
               {parseInt(weather.temp)}&deg;c
             </Text>
           </Box>
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={2} justifyItems={'center'}>
+        <SimpleGrid columns={2} spacing={2} justifyItems={'center'} mt={5}>
           <HStack>
-          <Icon as={eval(weather.icon)} /> <Text fontSize={"sm"} fontWeight={"500"}>
+          <Icon as={eval(weather.icon)} boxSize={{ base: '25px', md: '30px', lg: '35px' }} /> 
+          <Text fontSize={{ base: 'smaller', md: 'x-small', lg: 'small' }} fontWeight={"500"} letterSpacing={'wide'}>
              {weather.description}
             </Text>
           </HStack>
-          <Box>
-            <Text fontSize={"sm"} fontWeight={"500"}>
+          <Box fontSize={{ base: 'smaller', md: 'x-small', lg: 'small' }} fontWeight={"500"}>
+            <Text>
               Temp Min: {parseInt(weather.temp_min)}&deg;c
             </Text>
-            <Text fontSize={"sm"} fontWeight={"500"}>
+            <Text>
               Temp Max: {parseInt(weather.temp_max)}&deg;c
             </Text>
           </Box>

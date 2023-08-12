@@ -25,7 +25,7 @@ const CityWeather = () => {
 
   return (
     <Center height={'60vh'}>
-      <Card width={"60%"} backgroundColor={cardColor} color={"white"}>
+      <Card width={{ base: '80%', md: '60%', lg: '55%' }} backgroundColor={cardColor} color={"white"}>
         <CardHeader p={0} display={"flex"} justifyContent={"flex-start"}>
           <Button
             _hover={{ backgroundColor: "transparent" }}
@@ -43,10 +43,10 @@ const CityWeather = () => {
         <CardBody pt={0}>
           <VStack>
             <VStack>
-              <Text fontSize={"2xl"} fontWeight={700}>
+              <Text fontSize={{ base: 'xl', md: 'xl', lg: '2xl' }} fontWeight={700}>
                 {weather.name},{weather.country}
               </Text>
-              <Text>
+              <Text fontSize={{ base: '2xs', md: 'smaller', lg: 'samll' }}>
                 {weather.time},{weather.date}
               </Text>
             </VStack>
@@ -54,23 +54,23 @@ const CityWeather = () => {
               columns={3}
               justifyItems={"center"}
               pt={"2rem"}
-              width={"40%"}
+              width={{ base: '90%', md: '60%', lg: '40%' }}
               alignItems={"center"}
             >
               <Center flexDirection={"column"}>
-                <Icon boxSize={"50px"} as={eval(weather.icon)} />
-                <Text fontSize={"sm"} fontWeight={700}>
+                <Icon boxSize={{ base: '40px', md: '45px', lg: '50px' }} as={eval(weather.icon)} mb={4} />
+                <Text textAlign={'center'} fontSize={"sm"} fontWeight={500}>
                   {weather.description}
                 </Text>
               </Center>
               <Divider orientation="vertical" opacity={1} />
               <VStack>
-                <Text fontSize={"5xl"}>  {parseInt(weather.temp)}&deg;c </Text>
-                <Box>
-                  <Text fontSize={"sm"} fontWeight={"500"}>
+                <Text fontSize={{ base: '4xl', md: '3xl', lg: '5xl' }}>  {parseInt(weather.temp)}&deg;c </Text>
+                <Box fontSize={{ base: '2xs', md: 'xs', lg: 'smaller' }} fontWeight={"500"}>
+                  <Text >
                     Temp Min: {parseInt(weather.temp_min)}&deg;c
                   </Text>
-                  <Text fontSize={"sm"} fontWeight={"500"}>
+                  <Text>
                     Temp Max: {parseInt(weather.temp_max)}&deg;c
                   </Text>
                 </Box>

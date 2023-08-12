@@ -42,9 +42,9 @@ const Home = () => {
   return (
     <Box as="main">
       <Center as="section">
-        <InputGroup variant="filled" size="md" width={"40%"}>
+        <InputGroup variant="filled" size="md" width={{ base: '60%', md: '50%', lg: '40%' }}>
           <Input
-            height={"3rem"}
+            height={{ base: '2.5rem', md: '3rem', lg: '3rem' }}
             fontSize={"sm"}
             fontWeight={400}
             variant="filled"
@@ -55,7 +55,7 @@ const Home = () => {
             _hover={{ backgroundColor: "bgBlack" }}
             _focus={{ backgroundColor: "bgBlack" }}
           />
-          <InputRightElement width="8rem" height={"3rem"}>
+          <InputRightElement width={{ base: '5rem', md: '7rem', lg: '8rem' }} height={{ base: '2.5rem', md: '3rem', lg: '3rem' }}>
             <Button
               fontWeight={400}
               fontSize={"sm"}
@@ -83,7 +83,7 @@ const Home = () => {
         ) : isError ? (
           <Text fontSize={"4xl"}>{error.message}</Text>
         ) : (
-          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={"60%"}>
+          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={{ base: '80%', md: '60%', lg: '60%' }}>
             {cityWeather.map((city, index) => {
               if (colorIndex >= cardColors.length) {
                 colorIndex = 0;

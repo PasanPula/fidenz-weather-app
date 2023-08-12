@@ -15,7 +15,7 @@ const RootLayout = () => {
       <Box as="main" backgroundImage={bg} minHeight={'100vh'} backgroundSize={'cover'} backgroundRepeat={'no-repeat'} >
         <HStack as = "header"  justifyContent={"center"} alignItems={"center"} minHeight={'20vh'} spacing={'15px'} >
         <Img src={logo} width={'2.5rem'} height={'2rem'} />
-            <Heading color={"white"} fontSize={"xl"}>
+            <Heading color={"white"} fontSize={"xl"} fontWeight={500}>
               Weather App
             </Heading>
         </HStack>
