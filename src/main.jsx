@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App";
-import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./configs/Theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

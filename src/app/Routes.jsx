@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import RootLayout from "./Layout";
 import Home from "../pages/Home/Home";
-import CityWeather from "../pages/Home/CityWeather";
+import CityWeather from "../pages/City Weather/CityWeather"
 
 const Routes = createBrowserRouter(
   createRoutesFromElements(
