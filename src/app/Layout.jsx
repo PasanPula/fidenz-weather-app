@@ -7,11 +7,12 @@ import {
 } from "@chakra-ui/react";
 import logo from "../assets/Logo/Logo.png";
 import { Outlet } from "react-router-dom";
+import bg from '../assets/BG/bg.svg';
 
 const RootLayout = () => {
   return (
     <>
-      <Box as="main" className="main">
+      <Box as="main" backgroundImage={bg} minHeight={'100vh'} backgroundSize={'cover'} backgroundRepeat={'no-repeat'} >
         <HStack as = "header"  justifyContent={"center"} alignItems={"center"} minHeight={'20vh'} spacing={'15px'} >
         <Img src={logo} width={'2.5rem'} height={'2rem'} />
             <Heading color={"white"} fontSize={"xl"}>
