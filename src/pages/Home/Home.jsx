@@ -26,6 +26,7 @@ const Home = () => {
   ];
   let colorIndex = 0;
   
+  //Weather fetching Query
   const {
     isLoading,
     isError,
@@ -42,6 +43,7 @@ const Home = () => {
   return (
     <Box as="main">
       <Center as="section">
+        {/* Add City Input Section */}
         <InputGroup variant="filled" size="md" width={{ base: '60%', md: '50%', lg: '40%' }}>
           <Input
             height={{ base: '2.5rem', md: '3rem', lg: '3rem' }}
@@ -71,6 +73,8 @@ const Home = () => {
           </InputRightElement>
         </InputGroup>
       </Center>
+
+      {/* Weather Card Grid */}
       <Center as="section" mt={20} pb={40}>
         {isLoading ? (
           <Spinner

@@ -26,6 +26,7 @@ const CityWeather = () => {
   return (
     <Center height={'60vh'}>
       <Card width={{ base: '80%', md: '60%', lg: '55%' }} backgroundColor={cardColor} color={"white"}>
+        {/* Card header Section */}
         <CardHeader p={0} display={"flex"} justifyContent={"flex-start"}>
           <Button
             _hover={{ backgroundColor: "transparent" }}
@@ -40,7 +41,9 @@ const CityWeather = () => {
             <Icon boxSize={"20px"} as={BiArrowBack} onClick={()=> navigate(-1)} />
           </Button>
         </CardHeader>
+
         <CardBody pt={0}>
+          {/* Card Body Upper Section */}
           <VStack>
             <VStack>
               <Text fontSize={{ base: 'xl', md: 'xl', lg: '2xl' }} fontWeight={700}>
@@ -50,6 +53,8 @@ const CityWeather = () => {
                 {weather.time},{weather.date}
               </Text>
             </VStack>
+
+          {/* Card Body bottom Section */}
             <SimpleGrid
               columns={3}
               justifyItems={"center"}
@@ -63,7 +68,9 @@ const CityWeather = () => {
                   {weather.description}
                 </Text>
               </Center>
+
               <Divider orientation="vertical" opacity={1} />
+
               <VStack>
                 <Text fontSize={{ base: '4xl', md: '3xl', lg: '5xl' }}>  {parseInt(weather.temp)}&deg;c </Text>
                 <Box fontSize={{ base: '2xs', md: 'xs', lg: 'smaller' }} fontWeight={"500"}>
@@ -78,6 +85,7 @@ const CityWeather = () => {
             </SimpleGrid>
           </VStack>
         </CardBody>
+
         <CardFooter bg={"bgDark"} borderBottomRadius={6}></CardFooter>
       </Card>
     </Center>

@@ -1,3 +1,6 @@
+// Handle Raw weather data formatting
+// Params: weather data json
+// return filtered weather data array for each city
 import moment from "moment/moment";
 
 const weatherFilter = (data) => {

@@ -1,3 +1,4 @@
+//Handle Page routing and return routes object
 import {
   createBrowserRouter,
   createRoutesFromElements,

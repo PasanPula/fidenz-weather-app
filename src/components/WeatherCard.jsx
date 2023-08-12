@@ -1,3 +1,6 @@
+//Resuable Wearther Card component
+// PROPS : weather, cardColor
+// Return Card Element
 import {
   Card,
   CardHeader,
@@ -26,6 +29,7 @@ const WeatherCard = ({ weather, cardColor }) => {
       weather,
       cardColor
     } }) }}>
+
       <CardHeader p={0} display={"flex"} justifyContent={"flex-end"}>
         <Button
           _hover={{ backgroundColor: "transparent" }}
@@ -40,6 +44,7 @@ const WeatherCard = ({ weather, cardColor }) => {
           <Icon boxSize={'20px'} as={IoCloseOutline} /> 
         </Button>
       </CardHeader>
+
       <CardBody
         backgroundImage={cardBg}
         backgroundRepeat={"no-repeat"}
@@ -59,6 +64,7 @@ const WeatherCard = ({ weather, cardColor }) => {
             </Text>
           </Box>
         </SimpleGrid>
+
         <SimpleGrid columns={2} spacing={2} justifyItems={'center'} mt={5}>
           <HStack>
           <Icon as={eval(weather.icon)} boxSize={{ base: '25px', md: '30px', lg: '35px' }} /> 
@@ -76,6 +82,7 @@ const WeatherCard = ({ weather, cardColor }) => {
           </Box>
         </SimpleGrid>
       </CardBody>
+
       <CardFooter bg={"bgDark"} borderBottomRadius={6}></CardFooter>
     </Card>
   );

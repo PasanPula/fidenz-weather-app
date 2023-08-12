@@ -1,3 +1,4 @@
+// Common layout for every page
 import {
   Heading,
   Img,
