@@ -22,6 +22,23 @@ const weatherFilter = (data) => {
       temp_min: item.main.temp_min,
       temp_max: item.main.temp_max,
       description: item.weather[0].description,
+      pressure: item.main.pressure + "hpa",
+      humidity: item.main.humidity + "%",
+      visibility: (item.visibility /1000)+"km",
+      wind_speed:item.wind.speed+"m/s",
+      wind_deg:item.wind.deg+"Degree",
+      sunrise: new Date(item.sys.sunrise  * 1000)
+      .toLocaleTimeString("en-IN", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }),
+      sunset:new Date(item.sys.sunset  * 1000)
+      .toLocaleTimeString("en-IN", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }),
       icon: getWeatherIcon(item.weather[0].description),
     };
     return data;

@@ -17,6 +17,8 @@ import { useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import {BsSun,BsCloudDrizzle,BsClouds,BsCloudy,BsCloudSun,BsCloudFog} from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
+import { CiLocationArrow1 } from "react-icons/ci";
+
 
 const CityWeather = () => {
   const { state } = useLocation();
@@ -86,7 +88,66 @@ const CityWeather = () => {
           </VStack>
         </CardBody>
 
-        <CardFooter bg={"bgDark"} borderBottomRadius={6}></CardFooter>
+        <CardFooter bg={"bgDark"} borderBottomRadius={6} pl={3} pr={3}  width={"100%"} justifyContent={'space-around'}>
+        <SimpleGrid columns={3} width={{ base: '95%', md: '70%', lg: '60%' }} >
+          <Box
+            p={2}
+            display={"flex"}
+            flexDirection={"column"}
+            borderRight={"2px"}
+            borderColor={"whiteAlpha.500"}
+            height={"100%"}
+            flexGrow={"1"}
+            flexShrink={"1"}
+            flexBasis={"auto"}
+          >
+            <Text fontSize={"smaller"}>
+              <b>Pressure: </b>
+              {weather.pressure}hpa
+            </Text>
+            <Text fontSize={"smaller"}>
+              <b>Humidity: </b>
+              {weather.humidity}%
+            </Text>
+            <Text fontSize={"smaller"}>
+              <b>Visibility: </b>
+              {parseInt(weather.visibility) / 1000}km
+            </Text>
+          </Box>
+
+          <Box
+            p={2}
+            display={"flex"}
+            flexDirection={"column"}
+            borderRight={"2px"}
+            borderColor={"whiteAlpha.500"}
+            height={"100%"}
+            flexGrow={"1"}
+            flexShrink={"1"}
+            flexBasis={"auto"}
+            alignItems={'center'}
+          >
+            <Icon
+              boxSize={{ base: "30px", md: "30px", lg: "30px" }}
+              as={CiLocationArrow1}
+            />
+            <Text fontSize={"smaller"} fontWeight={500}>
+              {weather.description}
+            </Text>
+          </Box>
+
+          <Box display={"flex"} flexDirection={"column"} height={"100%"} p={2} >
+            <Text textAlign={"center"} fontSize={"smaller"}>
+              <b>Sunrise: </b>
+              {weather.sunrise}
+            </Text>
+            <Text textAlign={"center"} fontSize={"smaller"}>
+              <b>Sunset: </b>
+              {weather.sunset}
+            </Text>
+          </Box>
+        </SimpleGrid>
+      </CardFooter>
       </Card>
     </Center>
   );

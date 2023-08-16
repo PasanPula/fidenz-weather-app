@@ -14,8 +14,12 @@ import cityList from "../../configs/cities.json";
 import { useQuery } from "@tanstack/react-query";
 import { getCityWeather } from "../../api/weatherApi";
 import weatherFilter from "../../util/jsonWeatherFilter";
+import { getFromCache, storeInCache } from "../../util/cache";
 
 const Home = () => {
+
+  const [weatherData, setWeatherData] = useState(null);
+
   let cities = cityList.List.map((city) => city.CityCode).join(",");
   const cardColors = [
     "cardBlue",
@@ -87,7 +91,7 @@ const Home = () => {
         ) : isError ? (
           <Text fontSize={"4xl"}>{error.message}</Text>
         ) : (
-          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={{ base: '80%', md: '60%', lg: '60%' }}>
+          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={{ base: '80%', md: '70%', lg: '70%' }}>
             {cityWeather.map((city, index) => {
               if (colorIndex >= cardColors.length) {
                 colorIndex = 0;
