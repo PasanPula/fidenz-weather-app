@@ -82,12 +82,12 @@ const WeatherCard = ({ weather, cardColor }) => {
         >
           <Box>
             <Text
-              fontSize={{ base: "1em", md: "1.1em", lg: "1.5em" }}
+              fontSize={{ base: "1em", md: "1.1em", lg: "1.7em" }}
               fontWeight={"700"}
             >
               {weather.name},{weather.country}
             </Text>
-            <Center fontSize={{ base: "xs", md: "smaller", lg: "smaller" }}>
+            <Center fontSize={{ base: "xs", md: "smaller", lg: "small" }}>
               {weather.time}, {weather.date}
             </Center>
           </Box>
@@ -108,7 +108,7 @@ const WeatherCard = ({ weather, cardColor }) => {
               boxSize={{ base: "25px", md: "30px", lg: "35px" }}
             />
             <Text
-              fontSize={{ base: "smaller", md: "x-small", lg: "small" }}
+              fontSize={{ base: "smaller", md: "x-small", lg: "medium" }}
               fontWeight={"500"}
               letterSpacing={"wide"}
             >
@@ -116,7 +116,7 @@ const WeatherCard = ({ weather, cardColor }) => {
             </Text>
           </HStack>
           <Box
-            fontSize={{ base: "smaller", md: "x-small", lg: "small" }}
+            fontSize={{ base: "smaller", md: "x-small", lg: "medium" }}
             fontWeight={"500"}
           >
             <Text>Temp Min: {parseInt(weather.temp_min)}&deg;c</Text>
