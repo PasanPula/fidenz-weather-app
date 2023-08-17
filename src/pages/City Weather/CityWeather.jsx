@@ -71,7 +71,7 @@ const CityWeather = () => {
                 </Text>
               </Center>
 
-              <Divider orientation="vertical" opacity={1} />
+              <Divider orientation="vertical" opacity={0.5} width={'2px'}/>
 
               <VStack>
                 <Text fontSize={{ base: '4xl', md: '3xl', lg: '5xl' }}>  {parseInt(weather.temp)}&deg;c </Text>
@@ -103,15 +103,15 @@ const CityWeather = () => {
           >
             <Text fontSize={"smaller"}>
               <b>Pressure: </b>
-              {weather.pressure}hpa
+              {weather.pressure}
             </Text>
             <Text fontSize={"smaller"}>
               <b>Humidity: </b>
-              {weather.humidity}%
+              {weather.humidity}
             </Text>
             <Text fontSize={"smaller"}>
               <b>Visibility: </b>
-              {parseInt(weather.visibility) / 1000}km
+              {weather.visibility}
             </Text>
           </Box>
 
@@ -131,12 +131,12 @@ const CityWeather = () => {
               boxSize={{ base: "30px", md: "30px", lg: "30px" }}
               as={CiLocationArrow1}
             />
-            <Text fontSize={"smaller"} fontWeight={500}>
-              {weather.description}
+            <Text fontSize={"smaller"} fontWeight={500} textAlign={'center'}>
+              {weather.wind_speed} {weather.wind_deg}
             </Text>
           </Box>
 
-          <Box display={"flex"} flexDirection={"column"} height={"100%"} p={2} >
+          <Box display={"flex"} flexDirection={"column"} height={"100%"} p={2} justifyContent={'center'}>
             <Text textAlign={"center"} fontSize={"smaller"}>
               <b>Sunrise: </b>
               {weather.sunrise}

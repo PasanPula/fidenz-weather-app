@@ -1,13 +1,8 @@
 import axios from "axios";
+import { BASE_URL, UNIT, APP_ID } from "../configs/Constants";
 
-// Handle API Call vai Axios
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-const APP_ID = import.meta.env.VITE_API_KEY;
-const UNIT = import.meta.env.VITE_WEATHER_UNIT;
-
+// Handle API Call via Axios
 export const getCityWeather = async (city) => {
-    console.log("*************** API Called ******************");
     const response = await axios.get(BASE_URL,{params: {
         id:city,
         units: UNIT,

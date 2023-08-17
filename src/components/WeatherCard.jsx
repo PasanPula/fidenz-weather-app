@@ -47,6 +47,9 @@ const WeatherCard = ({ weather, cardColor }) => {
         });
       }}
     >
+      {/* 
+          Card Header with back button
+      */}
       <CardHeader p={0} display={"flex"} justifyContent={"flex-end"}>
         <Button
           _hover={{ backgroundColor: "transparent" }}
@@ -62,6 +65,9 @@ const WeatherCard = ({ weather, cardColor }) => {
         </Button>
       </CardHeader>
 
+      {/* 
+          Card body with Temperature details
+      */}
       <CardBody
         backgroundImage={cardBg}
         backgroundRepeat={"no-repeat"}
@@ -82,8 +88,7 @@ const WeatherCard = ({ weather, cardColor }) => {
               {weather.name},{weather.country}
             </Text>
             <Center fontSize={{ base: "xs", md: "smaller", lg: "smaller" }}>
-              {" "}
-              {weather.time}, {weather.date}{" "}
+              {weather.time}, {weather.date}
             </Center>
           </Box>
           <Box>
@@ -119,6 +124,10 @@ const WeatherCard = ({ weather, cardColor }) => {
           </Box>
         </SimpleGrid>
       </CardBody>
+
+       {/* 
+            Card Footer with related extra weather details
+      */}
 
       <CardFooter bg={"bgDark"} borderBottomRadius={6} pl={3} pr={3}>
         <SimpleGrid columns={3} width={"100%"} justifyContent={"space-between"}>
@@ -157,23 +166,30 @@ const WeatherCard = ({ weather, cardColor }) => {
             flexGrow={"1"}
             flexShrink={"1"}
             flexBasis={"auto"}
-            alignItems={'center'}
+            alignItems={"center"}
           >
             <Icon
               boxSize={{ base: "30px", md: "30px", lg: "30px" }}
               as={CiLocationArrow1}
             />
-            <Text fontSize={"smaller"} fontWeight={500}>
-              {weather.description}
+            <Text fontSize={"smaller"} fontWeight={600} textAlign={'center'}>
+              {weather.wind_speed} {weather.wind_deg}
             </Text>
           </Box>
 
-          <Box display={"flex"} flexDirection={"column"} height={"100%"} p={2} justifyContent={'center'} alignItems={'flex-end'}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            height={"100%"}
+            p={2}
+            justifyContent={"center"}
+            alignItems={"flex-end"}
+          >
             <Text textAlign={"center"} fontSize={"smaller"}>
               <b>Sunrise: </b>
               {weather.sunrise}
             </Text>
-            <Text textAlign={"center"} fontSize={"smaller"} >
+            <Text textAlign={"center"} fontSize={"smaller"}>
               <b>Sunset: </b>
               {weather.sunset}
             </Text>

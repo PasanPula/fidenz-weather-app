@@ -9,48 +9,60 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import WeatherCard from "../../components/WeatherCard";
-import cityList from "../../configs/cities.json";
-import { useQuery } from "@tanstack/react-query";
-import { getCityWeather } from "../../api/weatherApi";
-import weatherFilter from "../../util/jsonWeatherFilter";
-import { getFromCache, storeInCache } from "../../util/cache";
+import { getFromCache } from "../../util/cachingHandler";
+import { useEffect, useState } from "react";
+import { CACHE_EXPIRATION, CACHE_TIME_KEY } from "../../configs/Constants";
+import { getWeatherCards } from "../../services/weatherCardService";
+import { convertMinSec } from "../../util/timeConverter";
 
 const Home = () => {
-
   const [weatherData, setWeatherData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(undefined);
 
-  let cities = cityList.List.map((city) => city.CityCode).join(",");
-  const cardColors = [
-    "cardBlue",
-    "cardOrange",
-    "cardGreen",
-    "cardPurple",
-    "cardRed",
-  ];
-  let colorIndex = 0;
-  
-  //Weather fetching Query
-  const {
-    isLoading,
-    isError,
-    error,
-    data: cityWeather,
-  } = useQuery({
-    queryKey: ["cityWeatherKey"],
-    queryFn: () => getCityWeather(cities),
-    select: weatherFilter,
-    retry: 3,
-    staleTime: 300000, 
-  });
+  //restoring handler of weather data
+  const fetchAndUpdate = async () => {
+    const lastUpdateTime = getFromCache(CACHE_TIME_KEY);
+    let availableTime = CACHE_EXPIRATION;
+    setIsLoading(true);
+
+    if (lastUpdateTime) {
+      console.log("last refersh time:", new Date(lastUpdateTime).getHours(),":",new Date(lastUpdateTime).getMinutes(),":",new Date(lastUpdateTime).getSeconds());
+    }
+
+    try {
+      if (lastUpdateTime && Date.now() - lastUpdateTime < CACHE_EXPIRATION) {
+        //Restoring available time from cache to resume the timer
+        availableTime = CACHE_EXPIRATION - (Date.now() - lastUpdateTime);
+        setWeatherData(await getWeatherCards(true));
+      } else {
+        setWeatherData(await getWeatherCards(false));
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+    } finally {
+      console.log("next refersh in:", convertMinSec(availableTime));
+      setTimeout(fetchAndUpdate, availableTime);
+    }
+    
+  };
+
+  useEffect(() => {
+    fetchAndUpdate();
+  }, []);
 
   return (
     <Box as="main">
       <Center as="section">
         {/* Add City Input Section */}
-        <InputGroup variant="filled" size="md" width={{ base: '60%', md: '50%', lg: '40%' }}>
+        <InputGroup
+          variant="filled"
+          size="md"
+          width={{ base: "60%", md: "50%", lg: "40%" }}
+        >
           <Input
-            height={{ base: '2.5rem', md: '3rem', lg: '3rem' }}
+            height={{ base: "2.5rem", md: "3rem", lg: "3rem" }}
             fontSize={"sm"}
             fontWeight={400}
             variant="filled"
@@ -61,7 +73,10 @@ const Home = () => {
             _hover={{ backgroundColor: "bgBlack" }}
             _focus={{ backgroundColor: "bgBlack" }}
           />
-          <InputRightElement width={{ base: '5rem', md: '7rem', lg: '8rem' }} height={{ base: '2.5rem', md: '3rem', lg: '3rem' }}>
+          <InputRightElement
+            width={{ base: "5rem", md: "7rem", lg: "8rem" }}
+            height={{ base: "2.5rem", md: "3rem", lg: "3rem" }}
+          >
             <Button
               fontWeight={400}
               fontSize={"sm"}
@@ -88,22 +103,17 @@ const Home = () => {
             color="blue.500"
             size="xl"
           />
-        ) : isError ? (
-          <Text fontSize={"4xl"}>{error.message}</Text>
+        ) : error ? (
+          <Text fontSize={"xl"} color={"white"}>
+            {error}
+          </Text>
         ) : (
-          <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px" width={{ base: '80%', md: '70%', lg: '70%' }}>
-            {cityWeather.map((city, index) => {
-              if (colorIndex >= cardColors.length) {
-                colorIndex = 0;
-              }
-              return (
-                <WeatherCard
-                  key={index}
-                  weather={city}
-                  cardColor={cardColors[colorIndex++]}
-                />
-              );
-            })}
+          <SimpleGrid
+            columns={{ sm: 1, md: 2 }}
+            spacing="40px"
+            width={{ base: "80%", md: "70%", lg: "70%" }}
+          >
+            {weatherData}
           </SimpleGrid>
         )}
       </Center>
