@@ -1,6 +1,7 @@
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const APP_ID = import.meta.env.VITE_API_KEY;
 export const UNIT = import.meta.env.VITE_WEATHER_UNIT;
+export const MODE = import.meta.env.MODE
 
 export const CARD_COLORS = [
     "cardBlue",

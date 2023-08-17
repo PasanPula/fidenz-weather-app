@@ -10,8 +10,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { getFromCache } from "../../util/cachingHandler";
-import { useEffect, useState } from "react";
-import { CACHE_EXPIRATION, CACHE_TIME_KEY } from "../../configs/Constants";
+import { useEffect, useState, useRef } from "react";
+import {
+  CACHE_EXPIRATION,
+  CACHE_TIME_KEY,
+  MODE,
+} from "../../configs/Constants";
 import { getWeatherCards } from "../../services/weatherCardService";
 import { convertMinSec } from "../../util/timeConverter";
 
@@ -19,6 +23,8 @@ const Home = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
+  const effectRan = useRef(false);
+  const timeOutId = useRef(null);
 
   //restoring handler of weather data
   const fetchAndUpdate = async () => {
@@ -27,7 +33,14 @@ const Home = () => {
     setIsLoading(true);
 
     if (lastUpdateTime) {
-      console.log("last refersh time:", new Date(lastUpdateTime).getHours(),":",new Date(lastUpdateTime).getMinutes(),":",new Date(lastUpdateTime).getSeconds());
+      console.log(
+        "last refersh time:",
+        new Date(lastUpdateTime).getHours(),
+        ":",
+        new Date(lastUpdateTime).getMinutes(),
+        ":",
+        new Date(lastUpdateTime).getSeconds()
+      );
     }
 
     try {
@@ -41,15 +54,21 @@ const Home = () => {
       setIsLoading(false);
     } catch (error) {
       setError(error);
-    } finally {
-      console.log("next refersh in:", convertMinSec(availableTime));
-      setTimeout(fetchAndUpdate, availableTime);
     }
-    
+    console.log("next refersh in:", convertMinSec(availableTime));
+    timeOutId.current = setTimeout(fetchAndUpdate, availableTime);
   };
 
   useEffect(() => {
-    fetchAndUpdate();
+    if (effectRan.current === false || MODE !== "development") {
+      fetchAndUpdate();
+    }
+    return () => {
+      effectRan.current = true;
+      if (timeOutId.current) {
+        clearTimeout(timeOutId.current);
+      }
+    };
   }, []);
 
   return (
