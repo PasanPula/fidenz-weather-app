@@ -3,6 +3,7 @@
 // return filtered weather data array for each city
 import moment from "moment/moment";
 import { DISPLAY_METRIC } from "../configs/Constants";
+import {BsSun,BsCloudDrizzle,BsClouds,BsCloudy,BsCloudSun,BsCloudFog} from 'react-icons/bs';
 
 const tempweatherFilter = (item) => {
     const data = {
@@ -22,35 +23,34 @@ const tempweatherFilter = (item) => {
       wind_speed:item.wind.speed+DISPLAY_METRIC.speed,
       wind_deg:item.wind.deg+DISPLAY_METRIC.direction,
       sunrise:localDateFormat(item.sys.sunrise),
-      sunset:localDateFormat(item.sys.sunset),
-      icon: getWeatherIcon(item.weather[0].description),
+      sunset:localDateFormat(item.sys.sunset)
     };
     return data;
 };
 
-function getWeatherIcon(description) {
+export function getWeatherIcon(description) {
   if (description === "clear sky") {
-    return "BsSun";
+    return BsSun;
   } else if (description === "few clouds") {
-    return "BsCloudy";
+    return BsCloudy;
   } else if (description === "scattered clouds") {
-    return "BsClouds";
+    return BsClouds;
   } else if (description === "broken clouds") {
-    return "BsClouds";
+    return BsClouds;
   } else if (description === "overcast clouds") {
-    return "BsCloudSun";
+    return BsCloudSun;
   } else if (description === "mist") {
-    return "BsCloudFog";
+    return BsCloudFog;
   } else if (description === "light intensity drizzle") {
-    return "BsCloudDrizzle";
+    return BsCloudDrizzle;
   } else if (description === "moderate rain") {
-    return "BsCloudDrizzle";
+    return BsCloudDrizzle;
   } else if (description === "rain") {
-    return "BsCloudDrizzle";
+    return BsCloudDrizzle;
   } else if (description === "shower rain") {
-    return "BsCloudDrizzle";
+    return BsCloudDrizzle;
   } else {
-    return "BsSun";
+    return BsSun;
   }
 }
 

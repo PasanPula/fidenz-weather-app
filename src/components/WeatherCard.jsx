@@ -18,17 +18,9 @@ import {
 } from "@chakra-ui/react";
 import { IoCloseOutline } from "react-icons/io5";
 import cardBg from "../assets/BG/cardBg.png";
-
-import {
-  BsSun,
-  BsCloudDrizzle,
-  BsClouds,
-  BsCloudy,
-  BsCloudSun,
-  BsCloudFog,
-} from "react-icons/bs";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { getWeatherIcon } from "../util/weatherJsonFilter";
 
 const WeatherCard = ({ weather, cardColor }) => {
   const navigate = useNavigate();
@@ -104,7 +96,7 @@ const WeatherCard = ({ weather, cardColor }) => {
         <SimpleGrid columns={2} spacing={2} justifyItems={"center"} mt={5}>
           <HStack>
             <Icon
-              as={eval(weather.icon)}
+              as={getWeatherIcon(weather.description)}
               boxSize={{ base: "25px", md: "30px", lg: "35px" }}
             />
             <Text
@@ -141,16 +133,17 @@ const WeatherCard = ({ weather, cardColor }) => {
             flexGrow={"1"}
             flexShrink={"1"}
             flexBasis={"auto"}
+            fontSize={{ base: "x-small", md: "x-small", lg: "smaller" }}
           >
-            <Text fontSize={"smaller"}>
+            <Text>
               <b>Pressure: </b>
               {weather.pressure}
             </Text>
-            <Text fontSize={"smaller"}>
+            <Text>
               <b>Humidity: </b>
               {weather.humidity}
             </Text>
-            <Text fontSize={"smaller"}>
+            <Text>
               <b>Visibility: </b>
               {weather.visibility}
             </Text>
@@ -167,12 +160,13 @@ const WeatherCard = ({ weather, cardColor }) => {
             flexShrink={"1"}
             flexBasis={"auto"}
             alignItems={"center"}
+            fontSize={{ base: "x-small", md: "x-small", lg: "smaller" }}
           >
             <Icon
               boxSize={{ base: "30px", md: "30px", lg: "30px" }}
               as={CiLocationArrow1}
             />
-            <Text fontSize={"smaller"} fontWeight={600} textAlign={'center'}>
+            <Text fontWeight={600} textAlign={'center'}>
               {weather.wind_speed} {weather.wind_deg}
             </Text>
           </Box>
@@ -184,12 +178,13 @@ const WeatherCard = ({ weather, cardColor }) => {
             p={2}
             justifyContent={"center"}
             alignItems={"flex-end"}
+            fontSize={{ base: "x-small", md: "x-small", lg: "smaller" }}
           >
-            <Text textAlign={"center"} fontSize={"smaller"}>
+            <Text textAlign={"center"}>
               <b>Sunrise: </b>
               {weather.sunrise}
             </Text>
-            <Text textAlign={"center"} fontSize={"smaller"}>
+            <Text textAlign={"center"}>
               <b>Sunset: </b>
               {weather.sunset}
             </Text>

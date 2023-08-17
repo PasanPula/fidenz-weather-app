@@ -14,10 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { BiArrowBack } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
-import {BsSun,BsCloudDrizzle,BsClouds,BsCloudy,BsCloudSun,BsCloudFog} from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
 import { CiLocationArrow1 } from "react-icons/ci";
+import { getWeatherIcon } from "../../util/weatherJsonFilter";
 
 
 const CityWeather = () => {
@@ -65,7 +64,7 @@ const CityWeather = () => {
               alignItems={"center"}
             >
               <Center flexDirection={"column"}>
-                <Icon boxSize={{ base: '40px', md: '45px', lg: '50px' }} as={eval(weather.icon)} mb={4} />
+                <Icon boxSize={{ base: '40px', md: '45px', lg: '50px' }} as={getWeatherIcon(weather.description)} mb={4} />
                 <Text textAlign={'center'} fontSize={"sm"} fontWeight={500}>
                   {weather.description}
                 </Text>
